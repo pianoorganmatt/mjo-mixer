@@ -1,0 +1,6 @@
+dist/
+node_modules/
+audiomixer/dist/
+audiomixer/node_modules/
+.DS_Store
+audiomixer/.DS_Store

@@ -1,0 +1,527 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+body {
+  background: #000000;
+}
+
+.App {
+  max-width: 100%;
+  width: 100%;
+}
+
+.controls {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem;
+  left: 0;
+}
+
+.track--mixer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.track--mixer .track {
+  text-align: center;
+  min-width: 120px;
+}
+
+.track--mixer .track canvas {
+  margin: 0;
+  width: 100%;
+}
+
+.track--mixer .track h3 {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.audio--mixer {
+  text-align: center;
+  padding: 0;
+}
+
+.fader--mixer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  background-color: #2b2a2a;
+  padding: 0;
+  border-left: 1px solid #000000;
+}
+
+.fade--wave {
+  display: flex;
+  gap: 5px;
+  background: #111111;
+  padding: 5px;
+  margin: 2rem auto 1rem;
+  border-radius: 5px;
+  max-width: calc(100% - 20px);
+}
+
+.fader-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+  background: #2b2a2a;
+  color: #ffffff;
+  position: relative;
+  min-height: 300px;
+  min-width: 40px;
+  border-radius: 5px;
+}
+
+.fader-container label {
+  font-size: 14px;
+}
+
+.track .btn {
+  background: #777777;
+  color: #ffffff;
+  border: 0;
+  padding: .5rem 1rem;
+  display: inline-block;
+  margin: 0;
+  cursor: pointer;
+  flex: 1 1;
+  position: relative;
+}
+
+.btn--group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.track .btn+.btn {
+  background: #888888;
+  color: #ffffff;
+}
+
+.track .btn--mute,
+.track .btn--solo {
+  opacity: 1;
+  border-bottom: 3px solid orangered;
+  transition: border-bottom .3s ease-in-out;
+  -webkit-transition: border-bottom .3s ease-in-out;
+}
+
+.track .btn--unmute,
+.track .btn--unsolo {
+  opacity: .7;
+  border-bottom: 3px solid transparent;
+  transition: border-bottom .3s ease-in-out;
+  -webkit-transition: border-bottom .3s ease-in-out;
+}
+
+.track input[type=range] {
+  appearance: none;
+  width: 255px;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: auto;
+  right: auto;
+  margin: auto;
+  background: black;
+  border: none;
+  transform: rotate(-90deg) translate(-60%, 0%);
+  -webkit-transform: rotate(-90deg) translate(-60%, 0%);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.25) inset;
+  -webkit-box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.25) inset;
+}
+
+.track [type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 5px, black 6px), linear-gradient(0deg, #464646 0%, #5a5a5a 14%, #141414 15%, #141414 50%, #5a5a5a 84%, #141414 85%, #1e1e1e 100%);
+  box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.5);
+  cursor: row-resize;
+  height: 3rem;
+  width: 2rem;
+  z-index: 10;
+  transform: rotate(-90deg);
+}
+
+
+/* Mozilla Firefox */
+.track [type='range']::-moz-range-thumb {
+    background: repeating-linear-gradient(0deg, transparent, transparent 5px, black 6px), linear-gradient(0deg, #464646 0%, #5a5a5a 14%, #141414 15%, #141414 50%, #5a5a5a 84%, #141414 85%, #1e1e1e 100%);
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.5);
+    cursor: row-resize;
+    height: 3rem;
+    width: 2rem;
+    transform: rotate(-90deg);
+    z-index: 10;
+    border: none; /* Optional: remove any default border */
+}
+  
+  /* Internet Explorer */
+.track [type='range']::-ms-thumb {
+    background: repeating-linear-gradient(0deg, transparent, transparent 5px, black 6px), linear-gradient(0deg, #464646 0%, #5a5a5a 14%, #141414 15%, #141414 50%, #5a5a5a 84%, #141414 85%, #1e1e1e 100%);
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.5);
+    cursor: row-resize;
+    height: 3rem;
+    width: 2rem;
+    transform: rotate(-90deg);
+    z-index: 10;
+    border: none; /* Optional: remove any default border */
+}
+
+.controls button {
+  padding: .75rem 1.2rem;
+  border: 0;
+  color: #ffffff;
+  background: green;
+  border-radius: .25rem;
+  -webkit-border-radius: .25rem;
+  margin: 0 .25rem;
+  cursor: pointer;
+}
+
+.controls button+button {
+  background: darkred;
+}
+
+.knob {
+  display: flex;
+  position: relative;
+}
+
+.knob .ticks {
+  position: absolute;
+}
+
+.knob .ticks .tick {
+  position: absolute;
+  background: black;
+  box-shadow: inset 0 0 0 0 black;
+  width: 3px;
+  transition: box-shadow 0.5s;
+}
+
+.knob .ticks .tick.active {
+  box-shadow: inset 0 0 5px 2px #509eec, 0 0 0 1px #369;
+}
+
+.knob.outer {
+  border-radius: 50%;
+  border: 1px solid #222;
+  border-bottom: 5px solid #222;
+  background-image: radial-gradient(100% 70%, #666 6%, #333 90%);
+  box-shadow: 0 5px 15px 2px black, 0 0 5px 3px black, 0 0 0 12px #444;
+}
+
+.knob.inner {
+  border-radius: 50%;
+}
+
+.knob.inner .grip {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #509eec;
+  box-shadow: 0 0 3px 1px black;
+}
+
+.show--tracks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  gap: 12px;
+  margin: 0;
+  margin-top: 2rem;
+}
+
+.show--tracks label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  border: 1px solid #46464630;
+  padding: 1rem;
+}
+
+.show--tracks label:before {
+  content: "";
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 1px solid #cccccc;
+}
+
+.show--tracks input:checked+label:before {
+  background: #333333;
+}
+
+.show--tracks input:checked+label:after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 26px;
+  background: white;
+  width: 2px;
+  height: 3px;
+  box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+  transform: rotate(45deg);
+}
+
+.audio--mix--player .mix--track {
+  display: flex;
+  align-items: center;
+  gap: 20px
+}
+
+.mix--track .playy--mix {
+  width: 45px;
+  min-width: 45px;
+  height: 45px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background: #ffffff;
+  color: #111111;
+  cursor: pointer;
+}
+
+.mix--track h3 {
+  margin: 0;
+}
+
+.mix--track h3 small {
+  display: block;
+  font-size: 1rem;
+}
+
+.audio--mix--player ul {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  list-style: none;
+  border-style: solid;
+  border-width: 1px 0 0;
+  border-color: #ffffff30;
+  padding: 4rem 0 0;
+  border-radius: 0;
+}
+
+.audio--mix--player li {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  text-align: left;
+  color: #ffffff;
+}
+
+.audio--mix--player li.ml--auto {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.audio--mix--player li button {
+  background: none;
+  color: #ffffff;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  vertical-align: text-bottom;
+  cursor: pointer;
+}
+
+.sneak--bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  flex: 1 1;
+  border-style: solid;
+  border-width: 0 0 1px;
+  border-color: #ffffff30;
+  padding: 1rem 0 4rem;
+}
+
+.range {
+  flex: 1 1;
+}
+
+.sneak--bar input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* WebKit Track */
+.sneak--bar input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+/* Thumb */
+.sneak--bar input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -7px;
+  transition: background 0.2s ease-in-out;
+}
+
+/* Firefox */
+.sneak--bar input[type="range"]::-moz-range-track {
+  height: 1px;
+  background: transparent;
+  border-radius: 5px;
+}
+
+.sneak--bar input[type="range"]::-moz-range-progress {
+  background: #ffffff; /* Completed track color */
+  height: 1px;
+  border-radius: 5px;
+}
+
+.mixer--modal {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px);
+	z-index: 777777;
+	transition: opacity 0.3s ease;
+  opacity: 0;
+  display: none;
+}
+
+.mixer--modal button.modal--close {
+  position: absolute;
+  right: 1rem;
+  top: 10px;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border: 0;
+  outline: none;
+  color: #ffffff;
+  font-size: 45px;
+  cursor: pointer;
+}
+
+.mixer--modal--show {
+  opacity: 1;
+  display: flex;
+}
+
+.mixer--modal .modal--content {
+	background-color: #2b2a2a;
+	padding: 3rem 2rem;
+	position: relative;
+	background: #000;
+	z-index: 2000;
+	color: #fff;
+	max-width: 700px;
+	width: calc(100% - 30px);
+	border: 1px solid rgba(255, 255, 255, 0.30);
+	max-height: calc(100vh - 45px);
+	overflow-y: auto;
+	scrollbar-width: auto;
+}
+
+.mixer--modal .modal--content h2 {
+	color: #ffffff;
+	font-size: 50px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 100%;
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.mixer--modal .track--mixer {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.mixer--modal .modal-title {
+  color: #ffffff;
+}
+
+.mixer--modal .modal-header .btn-close {
+  filter: invert(1) brightness(1);
+  -webkit-filter: invert(1) brightness(1);
+}
+
+.mixer--modal .modal-header {
+  border-bottom: var(--bs-modal-header-border-width) solid #ffffff20;
+}
+
+.mixer--modal .controls {
+  padding: 1rem 0 0;
+  background: none;
+  position: relative;
+  text-align: center;
+}
+
+.mixer--modal .controls .stop_tracks {
+    background: darkred;
+}
+
+
+
+@media screen and (max-width:767px) {
+  .track--mixer {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  .track--mixer .track {
+    text-align: center;
+    min-width: 65px;
+  }
+
+  .audio--mixer {
+    margin-bottom: 30px;
+  }
+}
